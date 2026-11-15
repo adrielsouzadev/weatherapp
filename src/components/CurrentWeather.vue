@@ -10,7 +10,7 @@ const props = defineProps({
 const info = computed(() => getWeatherInfo(props.current.weatherCode))
 const location = computed(() => {
   const { name, region, country } = props.city
-  return [name, region !== name ? region : null, country].filter(Boolean).join(', ')
+  return [name, region, country].filter(Boolean).join(', ')
 })
 </script>
 

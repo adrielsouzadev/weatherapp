@@ -47,7 +47,10 @@ onMounted(() => {
 <template>
   <div class="app" :class="theme">
     <main>
-      <h1>Previsão do Tempo</h1>
+      <div class="app-title">
+        <img src="/logo.png" alt="" />
+        <h1>Clima</h1>
+      </div>
 
       <SearchBar :loading="loading" @search="handleSearch" />
 
@@ -73,6 +76,22 @@ onMounted(() => {
   align-items: center;
   padding: 32px 16px 16px;
   background: linear-gradient(160deg, #3a7bd5, #00d2ff);
+}
+
+.app-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.app-title img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 50%;
+  padding: 4px;
 }
 
 .app.clear {
