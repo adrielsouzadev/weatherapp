@@ -15,8 +15,8 @@ export async function searchCity(name) {
     throw new Error('Cidade não encontrada.')
   }
 
-  const { name: cityName, country, latitude, longitude } = data.results[0]
-  return { name: cityName, country, latitude, longitude }
+  const { name: cityName, admin1, country, latitude, longitude } = data.results[0]
+  return { name: cityName, region: admin1, country, latitude, longitude }
 }
 
 export async function getWeather(latitude, longitude) {

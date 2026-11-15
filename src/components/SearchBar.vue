@@ -20,7 +20,7 @@ function submit() {
     <input
       v-model="city"
       type="text"
-      placeholder="Pesquisar cidade..."
+      placeholder="Cidade ou cidade, estado"
       aria-label="Nome da cidade"
     />
 

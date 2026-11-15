@@ -8,11 +8,15 @@ const props = defineProps({
 })
 
 const info = computed(() => getWeatherInfo(props.current.weatherCode))
+const location = computed(() => {
+  const { name, region, country } = props.city
+  return [name, region !== name ? region : null, country].filter(Boolean).join(', ')
+})
 </script>
 
 <template>
   <section class="current-weather">
-    <h2>{{ city.name }}, {{ city.country }}</h2>
+    <h2>{{ location }}</h2>
 
     <div class="current-main">
       <i :class="['wi', info.icon]"></i>
