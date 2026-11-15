@@ -1,8 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import SearchBar from './components/SearchBar.vue'
+import CurrentWeather from './components/CurrentWeather.vue'
+import ForecastList from './components/ForecastList.vue'
 import { searchCity, getWeather } from './services/weatherService'
-import { getWeatherInfo } from './services/weatherCodes'
 
 const city = ref(null)
 const weather = ref(null)
@@ -32,16 +33,12 @@ async function handleSearch(name) {
 
     <SearchBar :loading="loading" @search="handleSearch" />
 
-    <p v-if="error">{{ error }}</p>
+    <p v-if="loading">Carregando...</p>
+    <p v-else-if="error">{{ error }}</p>
 
-    <section v-if="weather">
-      <h2>{{ city.name }}, {{ city.country }}</h2>
-
-      <p>
-        <i :class="['wi', getWeatherInfo(weather.current.weatherCode).icon]"></i>
-        {{ getWeatherInfo(weather.current.weatherCode).description }}
-        — {{ weather.current.temperature }}°C
-      </p>
-    </section>
+    <template v-else-if="weather">
+      <CurrentWeather :city="city" :current="weather.current" />
+      <ForecastList :daily="weather.daily" />
+    </template>
   </main>
 </template>
