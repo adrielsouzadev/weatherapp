@@ -3,6 +3,7 @@ import { ref, computed, onMounted } from 'vue'
 import SearchBar from './components/SearchBar.vue'
 import CurrentWeather from './components/CurrentWeather.vue'
 import ForecastList from './components/ForecastList.vue'
+import AppFooter from './components/AppFooter.vue'
 import { searchCity, getWeather } from './services/weatherService'
 import { getWeatherTheme } from './services/weatherCodes'
 
@@ -60,6 +61,7 @@ onMounted(() => {
 
       <p v-else class="status">Pesquise uma cidade para ver a previsão.</p>
     </main>
+    <AppFooter />
   </div>
 </template>
 
@@ -67,8 +69,9 @@ onMounted(() => {
 .app {
   min-height: 100vh;
   display: flex;
-  justify-content: center;
-  padding: 32px 16px;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 16px 16px;
   background: linear-gradient(160deg, #3a7bd5, #00d2ff);
 }
 
@@ -97,6 +100,7 @@ onMounted(() => {
 }
 
 main {
+  flex: 1;
   width: 100%;
   max-width: 480px;
   display: flex;
