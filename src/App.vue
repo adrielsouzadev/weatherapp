@@ -1,10 +1,12 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import SearchBar from './components/SearchBar.vue'
 import CurrentWeather from './components/CurrentWeather.vue'
 import ForecastList from './components/ForecastList.vue'
 import { searchCity, getWeather } from './services/weatherService'
 import { getWeatherTheme } from './services/weatherCodes'
+
+const STORAGE_KEY = 'lastCity'
 
 const city = ref(null)
 const weather = ref(null)
@@ -22,14 +24,23 @@ async function handleSearch(name) {
   try {
     city.value = await searchCity(name)
     weather.value = await getWeather(city.value.latitude, city.value.longitude)
+    localStorage.setItem(STORAGE_KEY, name)
   } catch (err) {
     city.value = null
     weather.value = null
-    error.value = err.message
+    error.value =
+      err instanceof TypeError
+        ? 'Sem conexão. Verifique sua internet e tente novamente.'
+        : err.message
   } finally {
     loading.value = false
   }
 }
+
+onMounted(() => {
+  const lastCity = localStorage.getItem(STORAGE_KEY)
+  if (lastCity) handleSearch(lastCity)
+})
 </script>
 
 <template>
@@ -46,6 +57,8 @@ async function handleSearch(name) {
         <CurrentWeather :city="city" :current="weather.current" />
         <ForecastList :daily="weather.daily" />
       </template>
+
+      <p v-else class="status">Pesquise uma cidade para ver a previsão.</p>
     </main>
   </div>
 </template>
