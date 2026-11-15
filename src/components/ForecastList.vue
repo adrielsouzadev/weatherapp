@@ -30,3 +30,72 @@ function formatDay(date) {
     </ul>
   </section>
 </template>
+<style scoped>
+.forecast {
+  padding: 20px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(10px);
+}
+
+h3 {
+  margin-bottom: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.forecast-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.forecast-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 4px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+}
+
+.forecast-day {
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.forecast-item .wi {
+  font-size: 1.6rem;
+}
+
+.forecast-temps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.forecast-temps span {
+  color: var(--text-soft);
+}
+
+@media (max-width: 480px) {
+  .forecast-list {
+    grid-template-columns: 1fr;
+  }
+
+  .forecast-item {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 12px 16px;
+  }
+
+  .forecast-temps {
+    flex-direction: row;
+    gap: 8px;
+  }
+}
+</style>
